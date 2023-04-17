@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: 0.5s;
+    background: linear-gradient(rgba(0, 0, 0, .3), 
+            rgba(0, 0, 0, .3)),
+            url(../images/login.jpg) center no-repeat;
+    background-size: cover;
+}
+
+
+.container {
+    position: absolute;
+    width: 800px;
+    height: 500px;
+    margin: 20px;
+}
+
+.BlueBackground {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, .2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.15);
+}
+
+.BlueBackground .box {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.BlueBackground .box h2 {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.BlueBackground .box button {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.Form_Box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.15);
+    transition: 0.5s ease;
+    overflow: hidden;
+}
+
+.Form_Box.active {
+    left: 50%;
+}
+
+body.active {
+    background: linear-gradient(rgba(0, 0, 0, .3), 
+            rgba(0, 0, 0, .3)),
+            url(../images/registration.jpg) center no-repeat;
+    background-size: cover;
+}
+
+.Form_Box .Form {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 50px;
+    transition: 0.5s;
+}
+
+.Form_Box .Form form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.SignInForm h3{
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: lighter;
+}
+
+.SignUpForm h3 {
+    text-align: center;
+    font-weight: lighter;
+    font-size: 1.5em;
+}
+
+.Form_Box .SignInForm {
+    transition-delay: 0.5s;
+}
+
+.Form_Box.active .SignInForm {
+    left: -25em;
+}
+
+.Form_Box .SignUpForm {
+    left: 25em;
+}
+
+.Form_Box.active .SignUpForm {
+    left: 0;
+}
+
+.Form_Box.active .SignUpForm {
+    transition-delay: 0.5s;
+}

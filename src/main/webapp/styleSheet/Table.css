@@ -1,0 +1,37 @@
+.table-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-panel table {
+    border-collapse: collapse;
+    width: 65em;
+    height: auto;
+    border: 1 solid var(--border-color);
+}
+
+.table-panel table thead tr th,
+.table-panel table tbody tr td {
+    border-bottom: 1px solid var(--border-color) ;
+    text-align: center;
+}
+
+.table-panel table tbody tr:hover {
+    background: var(--border-color);
+    color: var(--text-color);
+}
+td a{
+    text-decoration: none;
+}
+
+i.delete {
+    color: red;
+    margin: 0 1em;
+    font-size: 1.5em;
+}
+
+i.update {
+    color: var(--text-color);
+    font-size: 1.5em;
+}
