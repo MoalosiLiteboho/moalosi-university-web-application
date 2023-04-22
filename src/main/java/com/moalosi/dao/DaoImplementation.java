@@ -1,6 +1,20 @@
 package com.moalosi.dao;
 
-import com.moalosi.model.*;
+import com.moalosi.model.Announcement;
+import com.moalosi.model.AssigmentSubmissions;
+import com.moalosi.model.Assignment;
+import com.moalosi.model.AssignmentSubmission;
+import com.moalosi.model.Authority;
+import com.moalosi.model.Course;
+import com.moalosi.model.District;
+import com.moalosi.model.EnrollmentCourse;
+import com.moalosi.model.Feedback;
+import com.moalosi.model.Material;
+import com.moalosi.model.StudentFeedback;
+import com.moalosi.model.StudentGrade;
+import com.moalosi.model.StudentGrades;
+import com.moalosi.model.User;
+import com.moalosi.model.UserDetails;
 import com.moalosi.password.PasswordEncryptor;
 
 import java.sql.Connection;

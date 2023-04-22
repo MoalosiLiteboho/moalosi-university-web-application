@@ -21,6 +21,8 @@
         <script defer src="javaScript/SideBarMenu.js"></script>
         <script defer src="javaScript/PopUp.js"></script>
         <script defer src="javaScript/UploadFile.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     </head>
     <body>
         <nav>
