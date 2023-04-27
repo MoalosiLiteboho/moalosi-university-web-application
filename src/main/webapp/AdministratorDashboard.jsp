@@ -92,38 +92,12 @@
         <section class="dashboard">
             <div class="top">
                 <i class="uil uil-bars sidebar-toggle"></i>
-                <div class="search-box">
-                    <i class="uil uil-search"></i>
-                    <label for="searchInputId"></label><input type="text" name="search" id="searchInputId" placeholder="Search...">
-                </div>
                 <div class="profile">
                     <i class="uil uil-user"></i>
                     <h3 class="userUsername"><%= username %></h3>
                 </div>
             </div>
             <div class="dashboard-content">
-                <div class="panel-popup">
-                    <h4>Update Course</h4>
-                    <div class="add-form-container">
-                        <form action="administrator-add-new-course" method="post">
-                            <div class="input-container">
-                                <input type="text" name="name" id="nameId">
-                                <label for="nameId">Name</label>
-                            </div>
-                            <div class="input-container">
-                                <input type="text" name="description" id="descriptionId" autocomplete="off">
-                                <label for="descriptionId">Description</label>
-                            </div>
-                            <div class="input-container">
-                                <input type="text" name="type" id="typeId" autocomplete="off" placeholder=" ">
-                                <label for="typeId">Type</label>
-                            </div>
-                            <div class="button-container">
-                                <input type="submit" value="register">
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </section>
     </body>

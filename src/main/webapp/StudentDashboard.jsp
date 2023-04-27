@@ -106,7 +106,6 @@
                 <div class="add-form-container">
                     <form action="" method="post">
                         <div class="input-container">
-
                         </div>
                     </form>
                 </div>

@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @WebServlet(name = "addingCourseController", value = "/instructor-add-new-course-material")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, maxFileSize = 1024 * 1024 * 1_000, maxRequestSize = 1024 * 1024 * 1_000)
+@MultipartConfig
 public class AddCourseMaterialController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {

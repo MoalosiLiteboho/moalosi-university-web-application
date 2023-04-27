@@ -20,9 +20,11 @@ import java.time.LocalDate;
 public class StudentSubmitAssignment extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String folderName = "resources";
-        String uploadPath =  request.getServletContext().getRealPath("") + File.separator +  folderName;
         CourseService courseService = new CourseService();
+        String uploadPath =  request.getServletContext().getRealPath("") + File.separator +  folderName;
 
+        File directory = new File(uploadPath);
+        if(!directory.exists()) directory.mkdirs();
 
         Part filePart = request.getPart("file");
         String fileName = filePart.getSubmittedFileName();

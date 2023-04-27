@@ -1,11 +1,16 @@
 package com.moalosi.service;
 
-import com.moalosi.model.*;
 import com.moalosi.dao.DaoImplementation;
+import com.moalosi.model.AssigmentSubmissions;
+import com.moalosi.model.Assignment;
+import com.moalosi.model.AssignmentSubmission;
+import com.moalosi.model.Course;
+import com.moalosi.model.EnrollmentCourse;
+import com.moalosi.model.Material;
+import com.moalosi.model.StudentGrades;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CourseService {
     private final DaoImplementation dao;
@@ -49,7 +54,7 @@ public class CourseService {
                 .stream()
                 .filter(course -> course.instructorId() == instructorId)
                 .map(Course::id)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public String getCourseNameById(int courseId) {
@@ -109,7 +114,7 @@ public class CourseService {
                 .stream()
                 .filter(course -> course.studentId() == studentId)
                 .map(EnrollmentCourse::courseId)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Material> getCourseMaterialList() {

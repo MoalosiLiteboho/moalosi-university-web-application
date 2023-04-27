@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/administrator-assignment-submissions")
+@WebServlet(name = "administratorMenuAssignmentSubmissions", value = "/administrator-assignment-submissions")
 public class AdministratorMenuAssignmentSubmissions extends HttpServlet {
     private final CourseService courseService = new CourseService();
     private final UserService userService = new UserService();
@@ -23,7 +23,7 @@ public class AdministratorMenuAssignmentSubmissions extends HttpServlet {
         out.println("<h4>Assigment Submission</h4>");
         out.println("<button id=\"add-button\">");
         out.println("<i class=\"uil uil-file-download\"></i>");
-        out.println("<a href=\"#\">generate report</a>");
+        out.println("<a href=\"generate-assignment-report\">generate report</a>");
         out.println("</button>");
         out.println("<div class=\"table-panel\">");
         out.println("<table>");

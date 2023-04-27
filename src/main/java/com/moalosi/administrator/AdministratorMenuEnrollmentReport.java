@@ -23,7 +23,7 @@ public class AdministratorMenuEnrollmentReport extends HttpServlet {
         out.println("<h4>Course Enrollment Report</h4>");
         out.println("<button id=\"add-button\">");
         out.println("<i class=\"uil uil-file-download\"></i>");
-        out.println("<a href=\"#\">generate report</a>");
+        out.println("<a href=\"generate-enrollment-report\">generate report</a>");
         out.println("</button>");
         out.println("<div class=\"table-panel\">");
         out.println("<table>");

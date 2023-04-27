@@ -95,14 +95,10 @@ public class UserService {
     }
 
     public String grateOfAMark(int mark) {
-        if(mark >= 75)
-            return "Distinction";
-        else if(mark >= 60)
-            return "Merit";
-        else if(mark >= 50)
-            return "Pass";
-        else
-            return "Fail";
+        if(mark >= 75) return "Distinction";
+        else if(mark >= 60) return "Merit";
+        else if(mark >= 50) return "Pass";
+        else return "Fail";
     }
 
     public void gradeStudentById(StudentGrade studentGrade) {

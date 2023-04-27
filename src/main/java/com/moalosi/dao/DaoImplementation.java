@@ -1,5 +1,7 @@
 package com.moalosi.dao;
 
+import com.moalosi.database.CloseConnection;
+import com.moalosi.database.GetDatabaseConnection;
 import com.moalosi.model.Announcement;
 import com.moalosi.model.AssigmentSubmissions;
 import com.moalosi.model.Assignment;
@@ -19,19 +21,24 @@ import com.moalosi.password.PasswordEncryptor;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class DaoImplementation implements Dao{
+    private final GetDatabaseConnection getDatabaseConnection;
+    private final CloseConnection closeConnection;
+
+    public DaoImplementation() {
+        getDatabaseConnection = new GetDatabaseConnection();
+        closeConnection = new CloseConnection();
+    }
+
     public void registerUser(User user) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
         String username = user.name() + "." + user.surname();
         String password = new PasswordEncryptor().apply(user.name() + "@12345");
 
@@ -63,7 +70,7 @@ public class DaoImplementation implements Dao{
 
     public List<UserDetails> findAllUsers() {
         List<UserDetails> userDetailsList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from " +
@@ -94,7 +101,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void updateUser(User user) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("update UniversityManagementSystem.UserTable set Name = ?, Surname = ?, Gender = ?, DateOfBirth = ?, DistrictCode = ? where Id = ?");
@@ -114,7 +121,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void deleteUserById(int userId) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("delete from UniversityManagementSystem.UserAccountTable where UserId = ?");
@@ -149,7 +156,7 @@ public class DaoImplementation implements Dao{
 
     public List<District> findAllDistrict() {
         List<District> districtList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.DistrictTable");
@@ -170,7 +177,7 @@ public class DaoImplementation implements Dao{
 
     public List<Authority> findAllAuthorities() {
         List<Authority> authorityList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.AuthorityTable");
@@ -190,7 +197,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void registerCourse(Course course) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("insert into UniversityManagementSystem.CourseTable(Id, InstructorId, Name, Description, Type, CreationDate) values ( ?, ?, ?, ?, ?, ?)");
@@ -211,7 +218,7 @@ public class DaoImplementation implements Dao{
 
     public List<Course> findAllCourses() {
         List<Course> courseList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.CourseTable");
@@ -236,7 +243,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void deleteCourseById(int courseId) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("delete from UniversityManagementSystem.SubmissionTable where CourseId = ?");
@@ -278,7 +285,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void updateCourse(Course course) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("update UniversityManagementSystem.CourseTable set InstructorId = ?, Name = ?, Description = ?, Type = ? where Id = ?");
@@ -298,7 +305,7 @@ public class DaoImplementation implements Dao{
 
     public List<Assignment> findAllAssigment() {
         List<Assignment> assignmentList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.AssigmentTable");
@@ -324,7 +331,7 @@ public class DaoImplementation implements Dao{
 
     public List<Material> findAllMaterial() {
         List<Material> materialList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.CourseMaterial");
@@ -347,7 +354,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void saveCourseMaterial(Material material) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try{
             PreparedStatement statement = connection.prepareStatement("insert into UniversityManagementSystem.CourseMaterial(Id ,CourseId, Name, MaterialPath) values (?, ?, ?, ?)");
@@ -365,7 +372,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void saveCourseAssignment(Assignment assignment) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("insert into UniversityManagementSystem.AssigmentTable(Id, CourseId, Name, CreationDate, DeadLine, AssigmentPath) values (?, ?, ?, ?, ?, ?)");
@@ -384,7 +391,7 @@ public class DaoImplementation implements Dao{
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                statement = getConnection.get().prepareStatement("insert into UniversityManagementSystem.StudentGrades(CourseId, AssignmentId, StudentId, Submitted) values (?, ?, ?, ?)");
+                statement = getDatabaseConnection.get().prepareStatement("insert into UniversityManagementSystem.StudentGrades(CourseId, AssignmentId, StudentId, Submitted) values (?, ?, ?, ?)");
                 statement.setInt(1, assignment.courseId());
                 statement.setInt(2, assignment.id());
                 statement.setInt(3, result.getInt("StudentId"));
@@ -401,7 +408,7 @@ public class DaoImplementation implements Dao{
 
     public List<EnrollmentCourse> findAllEnrolledStudent() {
         List<EnrollmentCourse> enrollmentCourseList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.EnrollmentTable");
@@ -425,7 +432,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void enrollStudent(EnrollmentCourse course) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("insert into UniversityManagementSystem.EnrollmentTable(StudentId, CourseId, Enrollment) values ( ?, ?, ?)");
@@ -442,7 +449,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void unEnrollStudent(int courseId) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("delete from UniversityManagementSystem.EnrollmentTable where Id = ?");
@@ -458,7 +465,7 @@ public class DaoImplementation implements Dao{
 
     public List<AssigmentSubmissions> findAllSubmissions() {
         List<AssigmentSubmissions> assigmentSubmissionsList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.SubmissionTable");
@@ -482,7 +489,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void addAnnouncement(Announcement announcement) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("insert into UniversityManagementSystem.Announcement(Id, InstructorId, Tittle, CourseId, Announcement, CreatedDate) values (?, ?, ?, ?, ?, ?)");
@@ -503,7 +510,7 @@ public class DaoImplementation implements Dao{
 
     public List<Announcement> findAllAnnouncement() {
         List<Announcement> announcementList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.Announcement");
@@ -527,7 +534,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void deleteAnnouncement(int announcementId) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("delete from UniversityManagementSystem.Announcement where Id = ?");
@@ -543,7 +550,7 @@ public class DaoImplementation implements Dao{
 
     public List<StudentGrades> findAllStudentGrades() {
         List<StudentGrades> studentGradesList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.StudentGrades");
@@ -568,7 +575,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void gradeStudent(StudentGrade studentGrade) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
         try {
             PreparedStatement statement = connection.prepareStatement("update UniversityManagementSystem.StudentGrades set Marks = ?, Grade =? where Id = ?");
             statement.setInt(1, studentGrade.mark());
@@ -585,7 +592,7 @@ public class DaoImplementation implements Dao{
 
     public List<StudentFeedback> findAllStudentsFeedbacks() {
         List<StudentFeedback> feedbackList = new ArrayList<>();
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("select * from UniversityManagementSystem.StudentFeedBack");
@@ -607,7 +614,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void saveFeedback(Feedback feedback) {
-        Connection connection =getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("insert into UniversityManagementSystem.StudentFeedBack(Id, CourseId, Rating, FeedBack) values (?, ?, ?, ?)");
@@ -625,7 +632,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void updateAssigmentDeadline(int assignmentId, LocalDate newDeadline) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
         try {
             PreparedStatement statement = connection.prepareStatement("update UniversityManagementSystem.AssigmentTable set DeadLine = ? where Id = ?");
             statement.setDate(1, Date.valueOf(newDeadline));
@@ -640,7 +647,7 @@ public class DaoImplementation implements Dao{
     }
 
     public void submitAssigment(AssignmentSubmission assignment) {
-        Connection connection = getConnection.get();
+        Connection connection = getDatabaseConnection.get();
 
         try {
             PreparedStatement statement = connection.prepareStatement("insert into UniversityManagementSystem.SubmissionTable (Id, StudentId, CourseId, AssignmentId, SubmittedPath, SubmissionDate) values (?, ?, ?, ?, ?, ?)");
@@ -662,24 +669,4 @@ public class DaoImplementation implements Dao{
             closeConnection.accept(connection);
         }
     }
-
-    private final Supplier<Connection> getConnection = () -> {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UniversityManagementSystem", "root", "");
-        } catch (SQLException | ClassNotFoundException exception) {
-            exception.printStackTrace();
-        }
-        return connection;
-    };
-
-    private final Consumer<Connection> closeConnection = connection -> {
-        if(connection != null)
-            try {
-                connection.close();
-            } catch (SQLException exception) {
-                exception.printStackTrace();
-            }
-    };
 }
