@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.function.Supplier;
 
 public class IdGenerator implements Supplier<Integer> {
-    @Override
     public Integer get() {
         Calendar calendar = Calendar.getInstance();
         return Integer.parseInt(
