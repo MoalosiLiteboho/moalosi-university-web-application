@@ -5,7 +5,15 @@ import com.moalosi.dao.DaoImplementation;
 import com.moalosi.dtoMapper.InstructorNamesAndIdMapper;
 import com.moalosi.dtoMapper.UserDtoMapper;
 import com.moalosi.dtoMapper.UserIdAndAuthorityDtoMapper;
-import com.moalosi.model.*;
+import com.moalosi.model.Course;
+import com.moalosi.model.InstructorNamesAndId;
+import com.moalosi.model.SignInCredentials;
+import com.moalosi.model.StudentFeedback;
+import com.moalosi.model.StudentGrade;
+import com.moalosi.model.StudentGrades;
+import com.moalosi.model.User;
+import com.moalosi.model.UserDetails;
+import com.moalosi.model.UserIdAndAuthorityDto;
 import com.moalosi.password.PasswordEncryptor;
 
 import java.util.List;

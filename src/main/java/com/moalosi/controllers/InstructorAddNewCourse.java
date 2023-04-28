@@ -13,14 +13,10 @@ import java.time.LocalDate;
 
 @WebServlet(name = "instructorAddNewCourse", value = "/instructor-add-new-course")
 public class InstructorAddNewCourse extends HttpServlet {
-    private final CourseService courseService = new CourseService();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int instructorId = (int) request.getSession().getAttribute("userId");
-
-        courseService.registerCourse(new Course(
+        new CourseService().registerCourse(new Course(
                 new IdGenerator().get(),
-                instructorId,
+                (int) request.getSession().getAttribute("userId"),
                 request.getParameter("name"),
                 request.getParameter("description"),
                 request.getParameter("type"),

@@ -13,8 +13,6 @@ import java.time.LocalDate;
 
 @WebServlet(name = "UpdateUserDetails", value = "/update-user-servlet")
 public class UpdateUserController extends HttpServlet {
-    private final UserService userService = new UserService();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User(
                 Integer.parseInt(request.getParameter("userId")),
@@ -26,7 +24,7 @@ public class UpdateUserController extends HttpServlet {
                 Integer.parseInt(request.getParameter("authorityId"))
         );
 
-        userService.updateUser(user);
+        new UserService().updateUser(user);
         response.sendRedirect("AdministratorDashboard.jsp");
     }
 }

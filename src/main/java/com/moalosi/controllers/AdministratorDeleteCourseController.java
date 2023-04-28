@@ -16,8 +16,9 @@ public class AdministratorDeleteCourseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int courseId = Integer.parseInt(request.getParameter("id"));
 
-        if(courseService.checkIfCourseExistById(courseId))
-            courseService.deleteCourseById(courseId);
+        if(courseService.checkIfCourseExistById(courseId)) courseService.deleteCourseById(courseId);
+        else throw new RuntimeException("Class you trying to delete is not found in the database");
+
         response.sendRedirect("AdministratorDashboard.jsp");
     }
 }

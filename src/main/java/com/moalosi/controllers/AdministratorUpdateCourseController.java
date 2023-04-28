@@ -13,8 +13,6 @@ import java.time.LocalDate;
 
 @WebServlet(name = "AdministratorUpdateCourse", value = "/administrator-update-course-by-id")
 public class AdministratorUpdateCourseController extends HttpServlet {
-    private final CourseService courseService = new CourseService();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Course course = new Course(
                 Integer.parseInt(request.getParameter("courseId")),
@@ -25,7 +23,7 @@ public class AdministratorUpdateCourseController extends HttpServlet {
                 LocalDate.parse(request.getParameter("creationDate"))
         );
 
-        courseService.updateCourse(course);
+        new CourseService().updateCourse(course);
         response.sendRedirect("AdministratorDashboard.jsp");
     }
 }

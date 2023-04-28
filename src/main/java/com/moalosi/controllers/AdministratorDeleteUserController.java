@@ -28,7 +28,7 @@ public class AdministratorDeleteUserController extends HttpServlet {
     private void getDeleteUser(int userId, HttpServletResponse response) throws IOException {
         service.deleteUser(userId);
 
-        if(!service.checkIfUserExits(userId))
-            response.sendRedirect("AdministratorDashboard.jsp");
+        if(!service.checkIfUserExits(userId)) response.sendRedirect("AdministratorDashboard.jsp");
+        else throw new RuntimeException("User not deleted successfully");
     }
 }

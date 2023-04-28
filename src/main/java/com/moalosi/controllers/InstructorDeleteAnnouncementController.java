@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @WebServlet(name = "InstructorDeleteAnnouncement", value = "/delete-announcement")
 public class InstructorDeleteAnnouncementController extends HttpServlet {
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         new AnnouncementService()
                 .deleteAnnouncement(Integer.parseInt(request.getParameter("id")));

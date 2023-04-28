@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @WebServlet(name = "instructorUpdateAssignmentDeadline", value = "/instructor-update-assignment-deadline")
 public class InstructorUpdateAssignmentDeadline extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         new CourseService().updateDeadlineById(
                 Integer.parseInt(request.getParameter("assignmentId")),
                 LocalDate.parse(request.getParameter("deadline")));

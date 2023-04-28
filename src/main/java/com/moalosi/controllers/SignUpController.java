@@ -33,8 +33,8 @@ public class SignUpController extends HttpServlet {
 
         service.userRegistration(user);
 
-        if(service.checkIfUserExits(user.id()))
-            successfulUserRegistration(request, response);
+        if(service.checkIfUserExits(user.id())) successfulUserRegistration(request, response);
+        else throw new RuntimeException("User not registered");
     }
 
     private void successfulUserRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

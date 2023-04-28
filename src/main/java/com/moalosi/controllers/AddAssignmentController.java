@@ -22,7 +22,6 @@ import java.time.LocalDate;
 @WebServlet(name = "AddNewAssignment", value = "/instructor-Add-new-course-assigment")
 @MultipartConfig
 public class AddAssignmentController extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String folderName = "resources";
         String uploadPath =  request.getServletContext().getRealPath("") + File.separator +  folderName;

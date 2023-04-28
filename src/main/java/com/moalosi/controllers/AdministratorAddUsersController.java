@@ -14,7 +14,6 @@ import java.time.LocalDate;
 
 @WebServlet("/register-or-register-user")
 public class AdministratorAddUsersController extends HttpServlet {
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         registerUser(request, response);
     }
@@ -28,10 +27,11 @@ public class AdministratorAddUsersController extends HttpServlet {
                 LocalDate.parse(request.getParameter("dateOfBirth")),
                 Integer.parseInt(request.getParameter("districtCode")),
                 Integer.parseInt(request.getParameter("authorityId")));
+
         UserService service = new UserService();
         service.userRegistration(user);
 
-        if(service.checkIfUserExits(user.id()))
-            response.sendRedirect("AdministratorDashboard.jsp");
+        if(service.checkIfUserExits(user.id())) response.sendRedirect("AdministratorDashboard.jsp");
+        else throw new RuntimeException("User you trying to create is not created successfully");
     }
 }

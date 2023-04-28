@@ -13,7 +13,6 @@ import java.io.IOException;
 
 @WebServlet(name = "StudentAddNewFeedback", value = "/student-add-new-feedback")
 public class StudentAddFeedbackController extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String rating = request.getParameter("rating");
         int courseId = Integer.parseInt(request.getParameter("courseId"));

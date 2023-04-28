@@ -23,13 +23,4 @@ public class AuthorityService {
                 .map(Authority::authority)
                 .orElseThrow(() -> new RuntimeException("Authority with this " + authorityId + " id not found."));
     }
-
-    public int getAuthorityIdByAuthority(String role) {
-        return getAuthorityList()
-                .stream()
-                .filter(authority -> authority.authority().equals(role))
-                .map(Authority::id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Authority id with a role of " + role + " is not found."));
-    }
 }

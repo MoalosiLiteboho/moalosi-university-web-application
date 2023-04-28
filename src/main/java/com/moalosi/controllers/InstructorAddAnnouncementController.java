@@ -13,7 +13,6 @@ import java.time.LocalDate;
 
 @WebServlet(name = "AddNewAnnouncement", value = "/new-announcement")
 public class InstructorAddAnnouncementController extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int instructorId = (int) request.getSession().getAttribute("userId");
 
